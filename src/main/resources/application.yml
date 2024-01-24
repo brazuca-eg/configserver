@@ -2,12 +2,19 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    # active: native -> for local development
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: "classpath:/config"
+        # native:
+          # search-locations: "classpath:/config" -> for local development
+        git:
+          uri: "https://github.com/brazuca-eg/microservices-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
 
 server:
   port: 8071
